@@ -1,0 +1,50 @@
+
+
+
+pub fn process_input takes item command and state
+
+calls process done/pending
+
+state.rs contains pub fn read=file which takes file=name and load that data to Ymut data
+and then state is returned where data str is serde=json
+
+main has three pillars (processes, state and to=do)
+
+in the main, you gather command and title (-> deduce whether pending or done)
+
+then apply actions according to the command by process input
+
+
+in to_do there is a factory and also an ENum (Pending(Pending))
+
+to_do_factory receives str_item_type and title
+if type matches return OKPending((pending_item) or OK(ItemType(Done(done_item))
+
+to_do has 4 pillars mod (-todofactory and ENUM) content of ENUM1, ENUM2, both ENUM's base
+
+The base is contained in pending/done struct as value (key being super_struct)
+
+then there is a traits folder
+edit
+get
+delete
+create currently println only?
+and mod
+
+get's arguments are &self, title: &String, state : &serde_json::map<String, serde_json::value::Value> {}
+
+mod is only pub mod cr/del/edit/get
+
+del is state.remove(key) then state::write_to_file(path,state) whereas // <-- see, state intercts with state changing state so named state *
+cre is state.insert(key , json!(status<-value ie pending or done)) then 
+what do you think edit is ?
+edit is state.inesrt(key,json!(status) I guess identical to cre
+
+close i guess, but Edit has two (set_to_done and set_to_pending using state.insert)
+
+
+
+
+** read_file is essentially std::fs::File::open
+
+** write_to_file is essentially std::fs::write(file_name.to_string(), data.to_string()).expect("unable to write file");
